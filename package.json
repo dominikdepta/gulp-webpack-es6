@@ -1,0 +1,39 @@
+{
+  "name": "gulp-webpack-es6",
+  "version": "0.0.1",
+  "description": "Starter kit for creating simple browser scripts or prototypes with ES6 using Gulp, Webpack, Babel.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salvacom/gulp-webpack-es6.git"
+  },
+  "keywords": [
+    "start",
+    "kit",
+    "es6",
+    "gulp",
+    "webpack",
+    "babel",
+    "browser",
+    "javascript"
+  ],
+  "author": "Dominik Depta <dominikdepta@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/salvacom/gulp-webpack-es6/issues"
+  },
+  "homepage": "https://github.com/salvacom/gulp-webpack-es6#readme",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.3.3",
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-useref": "^3.1.2",
+    "gulp-webpack": "^1.5.0",
+    "webpack": "^2.3.3"
+  }
+}
