@@ -15,3 +15,9 @@ $ npm install
 ```shell
 $ gulp
 ```
+
+### Build
+```shell
+$ gulp build
+$ gulp serve:dist
+```
