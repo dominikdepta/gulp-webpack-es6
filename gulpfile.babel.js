@@ -32,6 +32,11 @@ let config = {
                 loader: 'babel-loader'
             }]
         }
+    },
+
+    // Sass
+    sass: {
+        outputStyle: 'expanded'
     }
 };
 
@@ -40,14 +45,15 @@ let config = {
  */
 
 // Default
-gulp.task('default', ['serve']);
+gulp.task('default', ['sass', 'js', 'serve']);
 
 // Watch
-gulp.task('serve', ['js'], () => {
+gulp.task('serve', () => {
     browserSync.init(config.browserSync);
 
     gulp.watch('./src/*.html').on('change', browserSync.reload);
     gulp.watch('src/js/**/*.js', ['js']);
+    gulp.watch('src/sass/**/*.scss', ['sass']);
 });
 
 // JavaScript
@@ -56,6 +62,16 @@ gulp.task('js', () => {
         .pipe($.plumber())
         .pipe($.webpack(config.webpack))
         .pipe(gulp.dest('./.tmp/js/'))
+        .pipe(browserSync.stream());
+});
+
+gulp.task('sass', () => {
+    return gulp.src('./src/sass/**/*.scss')
+        .pipe($.plumber())
+        .pipe($.sourcemaps.init())
+        .pipe($.sass(config.sass))
+        .pipe($.sourcemaps.write())
+        .pipe(gulp.dest('./.tmp/css/'))
         .pipe(browserSync.stream());
 });
 
