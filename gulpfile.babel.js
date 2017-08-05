@@ -1,9 +1,9 @@
 /**
  * PLUGINS
  */
-const gulp          = require('gulp');
-const $             = require('gulp-load-plugins')();
-const browserSync   = require('browser-sync').create();
+const gulp = require('gulp');
+const $ = require('gulp-load-plugins')();
+const browserSync = require('browser-sync').create();
 
 /**
  * CONFIG
@@ -18,7 +18,21 @@ let config = {
     },
 
     // Webpack
-    webpack: require('./webpack.config.js')
+    webpack: {
+        output: {
+            filename: 'bundle.js'
+        },
+
+        devtool: 'source-maps',
+
+        module: {
+            loaders: [{
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader'
+            }]
+        }
+    }
 };
 
 /**
