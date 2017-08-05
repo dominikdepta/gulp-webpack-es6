@@ -75,14 +75,41 @@ gulp.task('sass', () => {
         .pipe(browserSync.stream());
 });
 
-// TODO: js:build task
-gulp.task('js:build', () => {});
-
-// Build
-// TODO: build task
-// 1. Bundle.js to ./dist/js (js:build task)
-// 2. Useref
-// 3. index.html to ./dist
-gulp.task('build', () => {
-
+gulp.task('clean:dist', () => {
+    return gulp.src('./dist/', {read: false})
+        .pipe($.clean());
 });
+
+gulp.task('js:build', () => {
+    return gulp.src('./src/js/index.js')
+        .pipe($.webpack({
+            output: config.webpack.output,
+            module: config.webpack.module
+        }))
+        .pipe($.uglify())
+        .pipe(gulp.dest('./dist/js/'));
+});
+
+gulp.task('sass:build', () => {
+    return gulp.src('./src/sass/**/*.scss')
+        .pipe($.sass({
+            outputStyle: 'compressed'
+        }))
+        .pipe(gulp.dest('./dist/css/'));
+});
+
+gulp.task('serve:dist', () => {
+    browserSync.init({
+        server: {
+            baseDir: './dist'
+        }
+    });
+});
+
+gulp.task('html:build', () => {
+    return gulp.src('./src/*.html')
+        .pipe($.htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('build', ['clean:dist', 'js:build', 'sass:build', 'html:build']);
